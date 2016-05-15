@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Umsetzung | OSS-SRP - Dokumentation</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.6.7">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    
+    <link rel="prev" href="../intro/introduction.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book"
+        data-level="0.2"
+        data-chapter-title="Umsetzung"
+        data-filepath="umsetzung/umsetzung.md"
+        data-basepath=".."
+        data-revision="Sun May 15 2016 12:38:21 GMT+0200 (CEST)"
+        data-innerlanguage="">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        Part 1
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="0.1" data-path="intro/introduction.html">
+            
+                
+                    <a href="../intro/introduction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.1.</b>
+                        
+                        Einleitung
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="0.1.1" data-path="intro/introduction.html">
+            
+            <span><b>0.1.1.</b> Aufgabenstellung</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.1.2" data-path="intro/introduction.html">
+            
+            <span><b>0.1.2.</b> Ziel</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.1.3" data-path="intro/introduction.html">
+            
+            <span><b>0.1.3.</b> Anforderungen</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.1.4" data-path="intro/introduction.html">
+            
+            <span><b>0.1.4.</b> Technische Projektumsetzung</span>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="0.1.4.1" data-path="intro/introduction.html">
+            
+            <span><b>0.1.4.1.</b> Backend</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.1.4.2" data-path="intro/introduction.html">
+            
+            <span><b>0.1.4.2.</b> Frontend</span>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="0.2" data-path="umsetzung/umsetzung.html">
+            
+                
+                    <a href="../umsetzung/umsetzung.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.2.</b>
+                        
+                        Umsetzung
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >OSS-SRP - Dokumentation</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="umsetzung">Umsetzung</h1>
+<h2 id="datenbank">Datenbank</h2>
+<p>Die Datenbank ist ein PostgreSQL-System, in welches einmalig manuell die statischen Spiele-Daten importiert werden. Diese Daten werden nun dauerhaft alle 2 Wochen aktualisiert. Hier f&#xFC;r hat bietet ein anderes Community-Mitgleid einen PostgreSQL-Dump an, welcher vom System heruntergeladen wird und importiert wird.</p>
+<p>In die gleiche Datenbank werden auch die Verlustdaten in eigene Tabellen geschrieben. Hierf&#xFC;r werden f&#xFC;r die einzelnen ben&#xF6;tigten Bereiche Tabellen erstellt. Diese sind relationell miteinander verkn&#xFC;pft.</p>
+<h2 id="nodejs">NodeJS</h2>
+<p>NodeJS ist immernoch relativ experimentell, vor allem verglichen mit den gro&#xDF;en, wie Python und PHP. Jedoch vom reinen Umfang her bietet sich NodeJS durchaus an. Es ist derzeit die gr&#xF6;&#xDF;te Webumgebung, von der reinen Paketanzahl und -angebot.</p>
+<p>Es bietet sich zudem an, NodeJS zu nezten, da es nativ mit JSON arbeiten kann, und damit ideal f&#xFC;r den Umgang mit der CREST-API des Entwicklers von EVE Online, </p>
+<h2 id="authentification">Authentification</h2>
+<p>Die Authentifizierung findet &#xFC;ber &quot;CREST&quot;, die API des Entwicklers von EVE-Online statt.
+Hierzu wird ein Webbrowser aufgerufen, auf dem der User sich mit seinen pers&#xF6;nlichen Einloggdaten authentifizieren muss. Das Tool wartet auf Antwort der Seite.
+Sobald diese Antwort erfolgt und erfolgreich ist, gilt der User als eingeloggt. </p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../intro/introduction.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Einleitung"><i class="fa fa-angle-left"></i></a>
+        
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"livereload":{}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>
