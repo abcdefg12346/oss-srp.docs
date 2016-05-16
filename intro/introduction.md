@@ -15,7 +15,7 @@ Unsere Datenquelle ist zum ein statischer Datenxport ("SDE") und zum anderen ein
 
 Desweiteren gewünscht ist eine Integration in das bestehende Authentifizierungssystems via CREST, erweiterte Statistiken über User/deren Verluste und benutzerdefinierte Filter.
 Auch soll die Lossmail (der Verlust) automatisch auf der Seite "zkillboard.com" hochgeladen werden, da diese von vielen Spielern besucht wird.
----
+
 ## Technische Projektumsetzung
 
 ### Backend

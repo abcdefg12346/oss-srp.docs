@@ -51,7 +51,7 @@
         data-chapter-title="Umsetzung"
         data-filepath="umsetzung/umsetzung.md"
         data-basepath=".."
-        data-revision="Sun May 15 2016 12:38:21 GMT+0200 (CEST)"
+        data-revision="Mon May 16 2016 19:36:17 GMT+0200 (CEST)"
         data-innerlanguage="">
     
 
@@ -163,6 +163,33 @@
                     </a>
             
             
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="0.2.1" data-path="umsetzung/umsetzung.html">
+            
+            <span><b>0.2.1.</b> Datenbank</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.2.2" data-path="umsetzung/umsetzung.html">
+            
+            <span><b>0.2.2.</b> NodeJS</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.2.3" data-path="umsetzung/umsetzung.html">
+            
+            <span><b>0.2.3.</b> Authentification</span>
+            
+            
+        </li>
+    
+
+            </ul>
+            
         </li>
     
 
@@ -209,11 +236,46 @@
 <p>In die gleiche Datenbank werden auch die Verlustdaten in eigene Tabellen geschrieben. Hierf&#xFC;r werden f&#xFC;r die einzelnen ben&#xF6;tigten Bereiche Tabellen erstellt. Diese sind relationell miteinander verkn&#xFC;pft.</p>
 <h2 id="nodejs">NodeJS</h2>
 <p>NodeJS ist immernoch relativ experimentell, vor allem verglichen mit den gro&#xDF;en, wie Python und PHP. Jedoch vom reinen Umfang her bietet sich NodeJS durchaus an. Es ist derzeit die gr&#xF6;&#xDF;te Webumgebung, von der reinen Paketanzahl und -angebot.</p>
-<p>Es bietet sich zudem an, NodeJS zu nezten, da es nativ mit JSON arbeiten kann, und damit ideal f&#xFC;r den Umgang mit der CREST-API des Entwicklers von EVE Online, </p>
-<h2 id="authentification">Authentification</h2>
-<p>Die Authentifizierung findet &#xFC;ber &quot;CREST&quot;, die API des Entwicklers von EVE-Online statt.
-Hierzu wird ein Webbrowser aufgerufen, auf dem der User sich mit seinen pers&#xF6;nlichen Einloggdaten authentifizieren muss. Das Tool wartet auf Antwort der Seite.
-Sobald diese Antwort erfolgt und erfolgreich ist, gilt der User als eingeloggt. </p>
+<p>Es bietet sich zudem an, NodeJS zu nezten, da es nativ mit JSON arbeiten kann, und damit ideal f&#xFC;r den Umgang mit der CREST-API des Entwicklers von EVE Online.</p>
+<h2 id="authentifizierung">Authentifizierung</h2>
+<p>Die Public API <em>CREST</em> ist eine REST API. Dies bedeutet, dass solange die jeweilgen Pfade um auf die API zuzugreifen, dynamisch erzeugt werden, Updates der API nicht unsere App beinflussen.
+CREST ist deshalb sinnvoll zu benutzen, da es direkt mit dem Spieleserver kommuniziert und nicht mit der Backend-Datenbank des Entwicklers. Somit hat man einen klareren Zugang zum aktuellen Stand des Spieles. Des weiteren ist es f&#xFC;r hohen Traffic und starkes Caching ausgelegt, sodass sie schnell und zuverl&#xE4;ssig funktioniert.
+Ein gro&#xDF;er Teil der Endpoints ist ohne Authentifizierung zu erreichen. Hierzu muss man lediglich den entsprechenden Endpoint aufrufen und kann ohne weiteres mit den JSON-Daten arbeiten.
+Jedoch ben&#xF6;tigen wir f&#xFC;r den Zugriff auf die Verlustdaten eine Authentifizierung, um auf die userspezifischen Daten zugreifen zu k&#xF6;nnen.
+Hierzu wird ein <em>SSO-access-token</em> ben&#xF6;tigt, welches man erh&#xE4;lt, wenn man seine App bei dem Entwickler CCP registriert. Jede Anfrage auf einen Endpoint, welcher Authentifizierung ben&#xF6;tigt muss diesen Token beinhalten.</p>
+<p>Dies erreichen wir mit (in Ausz&#xFC;gen) folgendem Code:</p>
+<pre><code class="lang-javascript">router.get(<span class="hljs-string">&apos;/crest&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
+    <span class="hljs-keyword">const</span> endpoint = <span class="hljs-string">&apos;https://login.eveonline.com/oauth/token&apos;</span>;
+    <span class="hljs-keyword">const</span> params = {
+    [<span class="hljs-string">&apos;...&apos;</span>]
+    };
+    <span class="hljs-keyword">const</span> auth = {
+    [<span class="hljs-string">&apos;...&apos;</span>]
+    };
+
+    request.post(endpoint, {form: params, auth: auth}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">body</span>) </span>{
+      [<span class="hljs-string">&apos;...&apos;</span>]
+        <span class="hljs-keyword">const</span> headers = {
+            <span class="hljs-string">&apos;Authorization&apos;</span>: <span class="hljs-string">&apos;Bearer &apos;</span> + tokenData.access_token
+        }
+        <span class="hljs-keyword">return</span> request(endpoint, {headers: headers});
+    }).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">body</span>) </span>{
+        <span class="hljs-keyword">var</span> characterData = <span class="hljs-built_in">JSON</span>.parse(body);
+        <span class="hljs-keyword">return</span> cm.upsert(characterData).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">return</span> cm.get(characterData.CharacterID);
+        }).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">row</span>) </span>{
+            res.send({
+                token: token,
+                data: row
+            });
+        })
+    [<span class="hljs-string">&apos;...&apos;</span>]
+    })
+})
+
+<span class="hljs-built_in">module</span>.exports = router;
+</code></pre>
+<p>Hier bei wird auf den gew&#xFC;nschten Endpoint mit bestimmten Aufrufargumenten eine Anfrage gestellt. Die API gibt ein JSON-Objekt zur&#xFC;ck, welches die Daten zu dem angefragten Charakter erh&#xE4;lt.</p>
 
                     
                     </section>
