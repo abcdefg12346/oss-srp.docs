@@ -5,8 +5,9 @@ Wenn man einen Vergleich zwischen den gesetzten Anforderungen und dem Erreichten
 Wir haben ein funktionierendes Backend geschrieben, welches nach einer Authentifizierung mit dem offiziellen Service, Verlustdaten importieren kann und diese nach grundlegenden Kriterien automatisch filtert.
 
 ## Kann-Kriterien
-Das gesetzte Ziel, die statischen Daten des Entwicklers CCP von EVE Online automatisch in regelmäßigen Abständen in unsere Datenbank zu importieren, haben wir ebenfalls erreicht. So wird nun mit einem Crontab alle 6 Wochen automatisch vom System als PostgreSQL-Dump heruntergeladen und in das System importiert. Hierbei wird jeweils die alte Datenbank überschrieben, sodass wir keine Doppelungen im System haben.
-Dieser statische Import von Daten ist daher wichtig, dass das Spiel selbst ca. alle 6 Wochen aktualisiert wird und neuer Inhalt, Objekte und Gegenstände hinzukommen können.
+
+Anstatt wie vorher das gesetzte Ziel eines statischen Imports von Daten des Entwicklers zu nutzen, haben wir uns dazu entschieden einen _"Harvester"_ zu bauen, welcher nur die tatsächlich benötigten Daten importiert.
+Dies erlaubt uns weit mehr Flexibität und Skaliberbarkeit für weitere Ausbaumöglichkeiten derAnwendung. Auch entsteht so eine wesentlich kleinere Datenbank, da wir keinen Datenmüll ansammeln.
 
 ## Wunsch-Kriterien
 Als Wunsch-Kriterium haben wir uns gesetzt, ein Frontend für das System zu entwickeln. Dieses soll dazu dienen, die Verlustdaten inspizieren zu können und manuell die Daten zu evaluieren. Dieses Kriterium haben wir aus zeitlichen Gründen nicht mehr integrieren können.
@@ -21,7 +22,7 @@ Als Wunsch-Kriterium haben wir uns gesetzt, ein Frontend für das System zu entw
 | Dokumentation | 4h | 6h | +2h |
 | Gesammt | 25h | 27h | +2h |
 
-Somit lässt sich feststellen, dass wir das Projekt zwar im vorgegebenen Zeitraum der Projektdauer geschafft haben, jedoch das von uns gesetzte Ziel leicht überschritten haben. Dies ist einer Fehlkalkulation der Dauer für die Projektdokumentation zu schulden. 
+Somit lässt sich feststellen, dass wir das Projekt zwar im vorgegebenen Zeitraum der Projektdauer geschafft haben, jedoch das von uns gesetzte Ziel leicht überschritten haben. Dies ist einer Fehlkalkulation der Dauer für die Projektdokumentation zu schulden.
 
 ## Lessons learned
 

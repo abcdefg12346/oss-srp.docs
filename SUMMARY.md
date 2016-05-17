@@ -1,6 +1,7 @@
 # Summary
 
 * [Part 1](README.md)
+  * [Akronyme](acronyms.md)
   * [Einleitung](intro/introduction.md)
       * [Aufgabenstellung](intro/introduction.md##Aufgabenstellung)
       * [Ziel](intro/introduction.md#Ziel)
@@ -12,3 +13,10 @@
     * [Datenbank](umsetzung/umsetzung.md##Datenbank)
     * [NodeJS](umsetzung/umsetzung.md##NodeJS)
     * [Authentification](umsetzung/umsetzung.md##Authentification)
+  * [Analyse](analyse.md)
+    * [Soll-Kriterien](analyse.md#Soll-Kriterien)
+    * [Kann-Kriterien](analyse.md#Kann-Kriterien)
+    * [Wunsch-Kriterien](analyse.md#Wunsch-Kriterien)
+    * [Zeit](analyse.md#Zeit)
+    * [Lessons learned](analyse.md#'Lessons learned')
+  * [Quellen](sources.md)

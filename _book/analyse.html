@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Part 1 | OSS-SRP - Dokumentation</title>
+        <title>Analyse | OSS-SRP - Dokumentation</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Alexander Schittler, Niklas Josefsson. Fabian keine Ahnung">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.7">
         
         
@@ -37,8 +37,10 @@
         
     
     
-    <link rel="next" href="./acronyms.html" />
+    <link rel="next" href="./sources.html" />
     
+    
+    <link rel="prev" href="./umsetzung/umsetzung.html" />
     
 
         
@@ -47,9 +49,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="Part 1"
-        data-filepath="README.md"
+        data-level="0.4"
+        data-chapter-title="Analyse"
+        data-filepath="analyse.md"
         data-basepath="."
         data-revision="Tue May 17 2016 23:27:29 GMT+0200 (CEST)"
         data-innerlanguage="">
@@ -67,7 +69,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -207,7 +209,7 @@
             
         </li>
     
-        <li class="chapter " data-level="0.4" data-path="analyse.html">
+        <li class="chapter active" data-level="0.4" data-path="analyse.html">
             
                 
                     <a href="./analyse.html">
@@ -316,8 +318,63 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="osssrp--dokumentation">OSS-SRP - Dokumentation</h1>
-<p><em>Alexander Schittler, Niklas Josefsson. Fabian keine Ahnung</em></p>
+                        <h1 id="analyse">Analyse</h1>
+<h2 id="sollkriterien">Soll-Kriterien</h2>
+<p>Wenn man einen Vergleich zwischen den gesetzten Anforderungen und dem Erreichten zieht, kommt man zu dem Ergebniss, dass wir unsere Soll-Ziele erf&#xFC;llt haben.
+Wir haben ein funktionierendes Backend geschrieben, welches nach einer Authentifizierung mit dem offiziellen Service, Verlustdaten importieren kann und diese nach grundlegenden Kriterien automatisch filtert.</p>
+<h2 id="kannkriterien">Kann-Kriterien</h2>
+<p>Anstatt wie vorher das gesetzte Ziel eines statischen Imports von Daten des Entwicklers zu nutzen, haben wir uns dazu entschieden einen <em>&quot;Harvester&quot;</em> zu bauen, welcher nur die tats&#xE4;chlich ben&#xF6;tigten Daten importiert.
+Dies erlaubt uns weit mehr Flexibit&#xE4;t und Skaliberbarkeit f&#xFC;r weitere Ausbaum&#xF6;glichkeiten derAnwendung. Auch entsteht so eine wesentlich kleinere Datenbank, da wir keinen Datenm&#xFC;ll ansammeln.</p>
+<h2 id="wunschkriterien">Wunsch-Kriterien</h2>
+<p>Als Wunsch-Kriterium haben wir uns gesetzt, ein Frontend f&#xFC;r das System zu entwickeln. Dieses soll dazu dienen, die Verlustdaten inspizieren zu k&#xF6;nnen und manuell die Daten zu evaluieren. Dieses Kriterium haben wir aus zeitlichen Gr&#xFC;nden nicht mehr integrieren k&#xF6;nnen.</p>
+<h2 id="zeit">Zeit</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Soll</th>
+<th>Ist</th>
+<th>Differenz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kickoff</td>
+<td>1h</td>
+<td>1h</td>
+<td>0h</td>
+</tr>
+<tr>
+<td>Planung</td>
+<td>2h</td>
+<td>2h</td>
+<td>0h</td>
+</tr>
+<tr>
+<td>Umsetzung</td>
+<td>18h</td>
+<td>18h</td>
+<td>0h</td>
+</tr>
+<tr>
+<td>Dokumentation</td>
+<td>4h</td>
+<td>6h</td>
+<td>+2h</td>
+</tr>
+<tr>
+<td>Gesammt</td>
+<td>25h</td>
+<td>27h</td>
+<td>+2h</td>
+</tr>
+</tbody>
+</table>
+<p>Somit l&#xE4;sst sich feststellen, dass wir das Projekt zwar im vorgegebenen Zeitraum der Projektdauer geschafft haben, jedoch das von uns gesetzte Ziel leicht &#xFC;berschritten haben. Dies ist einer Fehlkalkulation der Dauer f&#xFC;r die Projektdokumentation zu schulden.</p>
+<h2 id="lessons-learned">Lessons learned</h2>
+<p>Dank des Projektes sind uns einige Dinge in Erfahrung getreten. Zum einen war die Wahl der technischen Grundlage f&#xFC;r das Projekt ideal gew&#xE4;hlt, jedoch war es nicht an die F&#xE4;higkeiten der Gruppenmitglieder angepasst.
+So kam es, dass man sich st&#xE4;rker als sonst erst in die Materie einarbeiten musste, da nur ein Gruppenmitglied gro&#xDF;e Erfahrungen mit NodeJS und PostgreSQL hatte. Diesen Missstand haben wir durch eine kluge Arbeitsaufteilung gel&#xF6;st. Deshalb konnten wir auch unseren Zeitplan noch im Rahmen einhalten.
+Desweiteren haben wir den Aufwand f&#xFC;r eine Projektdokumentation untersch&#xE4;tzt. So haben wir f&#xFC;r diesen Teil mehr Zeit ben&#xF6;tigt als wir urspr&#xFC;nglich kalkuliert haben. Hier h&#xE4;tten wir uns einen gr&#xF6;&#xDF;eren Zeitpuffer erarbeiten k&#xF6;nnen, wenn wir den Aufwand besser eingesch&#xE4;tzt h&#xE4;tten.</p>
 
                     
                     </section>
@@ -328,8 +385,10 @@
         </div>
 
         
+        <a href="./umsetzung/umsetzung.html" class="navigation navigation-prev " aria-label="Previous page: Umsetzung"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./acronyms.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Akronyme"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./sources.html" class="navigation navigation-next " aria-label="Next page: Quellen"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
