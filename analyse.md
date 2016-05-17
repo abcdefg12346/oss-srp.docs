@@ -19,7 +19,7 @@ Als Wunsch-Kriterium haben wir uns gesetzt, ein Frontend für das System zu entw
 | Planung | 2h | 2h | 0h |
 | Umsetzung | 18h | 18h | 0h |
 | Dokumentation | 4h | 6h | +2h |
-| Gesammt | 25h | 27h | +2h |
+| Gesamt | 25h | 27h | +2h |
 
 Somit lässt sich feststellen, dass wir das Projekt zwar im vorgegebenen Zeitraum der Projektdauer geschafft haben, jedoch das von uns gesetzte Ziel leicht überschritten haben. Dies ist einer Fehlkalkulation der Dauer für die Projektdokumentation zu schulden. 
 
