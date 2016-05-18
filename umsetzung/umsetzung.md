@@ -2,12 +2,42 @@
 
 ## Datenbank
 
-Die Datenbank ist ein PostgreSQL-System, in welches einmalig manuell die statischen Spiele-Daten importiert werden. Diese Daten werden nun dauerhaft alle 2 Wochen aktualisiert. Hier für hat bietet ein anderes Community-Mitgleid einen PostgreSQL-Dump an, welcher vom System heruntergeladen wird und importiert wird.
+Die Datenbank ist ein PostgreSQL-System, in welches einmalig manuell die statischen Spiele-Daten importiert werden sollten. Diese Daten werden  alle 6 Wochen aktualisiert. Hier für hat bietet ein anderes Community-Mitgleid einen PostgreSQL-Dump an, welcher vom System heruntergeladen werden und in die Datenbank importiert werden sollten.
 
 In anbetracht der Skalierbarkeit der Anwendung und zukünftigen Plänen mit der Applikation, war ein solcher statischer Import der Daten nicht nützlich.
 Daher haben wir uns entschieden eine eigene "Harvester"-Funktion zu schreiben. Zum einen benötigten wir aus dem PostgreSQL-Dump nur wenige Inhalte, und zum anderen hätten wir eine Art die Verlustdaten "einzusammeln" immer noch benötigt.
-In die gleiche Datenbank werden auch die Verlustdaten in eigene Tabellen geschrieben. Hierfür werden für die einzelnen benötigten Bereiche Tabellen erstellt. Diese sind relationell miteinander verknüpft.
+Diese Verlustdaten und statischen Daten stehen gemeinsam in einer Datenbank, welche relationell miteinander verknüpft ist.
 
+
+```javascript
+
+function Harvester(app) {
+	var self = this;
+	this.addMail = function(mail) {
+			this.cache.alliances.push({date: date, id: mail.victim.alliance.id, data: mail.victim.alliance});
+		}
+
+		mail.attackers.forEach(function(attacker) {
+				self.cache.alliances.push({date: date, id: attacker.alliance.id, data: attacker.alliance});
+		})
+
+		mail.attackers.forEach(function(attacker) {
+				self.cache.corporations.push({date: date, id: attacker.corporation.id, data: attacker.corporation});
+		})
+	}
+
+	// flush the cache into postgres
+
+	this.cache = {
+		alliances: [],
+		corporations: [],
+		characters: [],
+		shipTypes: []
+	}
+}
+
+module.exports = Harvester;
+```
 
 ## NodeJS
 

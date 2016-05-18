@@ -53,7 +53,7 @@
         data-chapter-title="Umsetzung"
         data-filepath="umsetzung/umsetzung.md"
         data-basepath=".."
-        data-revision="Tue May 17 2016 23:27:29 GMT+0200 (CEST)"
+        data-revision="Wed May 18 2016 08:26:52 GMT+0200 (CEST)"
         data-innerlanguage="">
     
 
@@ -320,10 +320,38 @@
                     
                         <h1 id="umsetzung">Umsetzung</h1>
 <h2 id="datenbank">Datenbank</h2>
-<p>Die Datenbank ist ein PostgreSQL-System, in welches einmalig manuell die statischen Spiele-Daten importiert werden. Diese Daten werden nun dauerhaft alle 2 Wochen aktualisiert. Hier f&#xFC;r hat bietet ein anderes Community-Mitgleid einen PostgreSQL-Dump an, welcher vom System heruntergeladen wird und importiert wird.</p>
+<p>Die Datenbank ist ein PostgreSQL-System, in welches einmalig manuell die statischen Spiele-Daten importiert werden sollten. Diese Daten werden  alle 6 Wochen aktualisiert. Hier f&#xFC;r hat bietet ein anderes Community-Mitgleid einen PostgreSQL-Dump an, welcher vom System heruntergeladen werden und in die Datenbank importiert werden sollten.</p>
 <p>In anbetracht der Skalierbarkeit der Anwendung und zuk&#xFC;nftigen Pl&#xE4;nen mit der Applikation, war ein solcher statischer Import der Daten nicht n&#xFC;tzlich.
 Daher haben wir uns entschieden eine eigene &quot;Harvester&quot;-Funktion zu schreiben. Zum einen ben&#xF6;tigten wir aus dem PostgreSQL-Dump nur wenige Inhalte, und zum anderen h&#xE4;tten wir eine Art die Verlustdaten &quot;einzusammeln&quot; immer noch ben&#xF6;tigt.
-In die gleiche Datenbank werden auch die Verlustdaten in eigene Tabellen geschrieben. Hierf&#xFC;r werden f&#xFC;r die einzelnen ben&#xF6;tigten Bereiche Tabellen erstellt. Diese sind relationell miteinander verkn&#xFC;pft.</p>
+Diese Verlustdaten und statischen Daten stehen gemeinsam in einer Datenbank, welche relationell miteinander verkn&#xFC;pft ist.</p>
+<pre><code class="lang-javascript">
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Harvester</span>(<span class="hljs-params">app</span>) </span>{
+    <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+    <span class="hljs-keyword">this</span>.addMail = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">mail</span>) </span>{
+            <span class="hljs-keyword">this</span>.cache.alliances.push({date: date, id: mail.victim.alliance.id, data: mail.victim.alliance});
+        }
+
+        mail.attackers.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">attacker</span>) </span>{
+                self.cache.alliances.push({date: date, id: attacker.alliance.id, data: attacker.alliance});
+        })
+
+        mail.attackers.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">attacker</span>) </span>{
+                self.cache.corporations.push({date: date, id: attacker.corporation.id, data: attacker.corporation});
+        })
+    }
+
+    <span class="hljs-comment">// flush the cache into postgres</span>
+
+    <span class="hljs-keyword">this</span>.cache = {
+        alliances: [],
+        corporations: [],
+        characters: [],
+        shipTypes: []
+    }
+}
+
+<span class="hljs-built_in">module</span>.exports = Harvester;
+</code></pre>
 <h2 id="nodejs">NodeJS</h2>
 <p>NodeJS ist immernoch relativ experimentell, vor allem verglichen mit den gro&#xDF;en, wie Python und PHP. Jedoch vom reinen Umfang her bietet sich NodeJS durchaus an. Es ist derzeit die gr&#xF6;&#xDF;te Webumgebung, von der reinen Paketanzahl und -angebot.</p>
 <p>Es bietet sich zudem an, NodeJS zu nezten, da es nativ mit JSON arbeiten kann, und damit ideal f&#xFC;r den Umgang mit der CREST-API des Entwicklers von EVE Online.</p>
