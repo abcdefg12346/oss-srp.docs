@@ -8,37 +8,6 @@ In anbetracht der Skalierbarkeit der Anwendung und zukünftigen Plänen mit der 
 Daher haben wir uns entschieden eine eigene "Harvester"-Funktion zu schreiben. Zum einen benötigten wir aus dem PostgreSQL-Dump nur wenige Inhalte, und zum anderen hätten wir eine Art die Verlustdaten "einzusammeln" immer noch benötigt.
 Diese Verlustdaten und statischen Daten stehen gemeinsam in einer Datenbank, welche relationell miteinander verknüpft ist.
 
-
-```javascript
-
-function Harvester(app) {
-	var self = this;
-	this.addMail = function(mail) {
-			this.cache.alliances.push({date: date, id: mail.victim.alliance.id, data: mail.victim.alliance});
-		}
-
-		mail.attackers.forEach(function(attacker) {
-				self.cache.alliances.push({date: date, id: attacker.alliance.id, data: attacker.alliance});
-		})
-
-		mail.attackers.forEach(function(attacker) {
-				self.cache.corporations.push({date: date, id: attacker.corporation.id, data: attacker.corporation});
-		})
-	}
-
-	// flush the cache into postgres
-
-	this.cache = {
-		alliances: [],
-		corporations: [],
-		characters: [],
-		shipTypes: []
-	}
-}
-
-module.exports = Harvester;
-```
-
 ## NodeJS
 
 NodeJS ist immernoch relativ experimentell, vor allem verglichen mit den großen, wie Python und PHP. Jedoch vom reinen Umfang her bietet sich NodeJS durchaus an. Es ist derzeit die größte Webumgebung, von der reinen Paketanzahl und -angebot.
@@ -49,6 +18,7 @@ Mit der oben beschriebenen _"Harvester"_-Methode sammeln wir nur die von uns ben
 Hiermit haben wir nur die gezielten Datensätze die wir für eine weitere Verarbeitung benötigen und vermeiden somit Datenmüll in der Datenbank.
 Dies ist, in gekürzter Form, die _"Harvester"_-Methode.
 Es wird eine "Killmail" geladen, die entsprechenden, gewünschten Daten geladen und daraufhin in die Datenbank importiert.
+
 ```javascript
 function Harvester(app) {
 	this.addMail = function(mail) {

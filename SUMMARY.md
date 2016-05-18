@@ -1,7 +1,6 @@
 # Summary
 
 * [Part 1](README.md)
-  * [Akronyme](acronyms.md)
   * [Einleitung](intro/introduction.md)
       * [Aufgabenstellung](intro/introduction.md##Aufgabenstellung)
       * [Ziel](intro/introduction.md#Ziel)
