@@ -8,6 +8,8 @@ In anbetracht der Skalierbarkeit der Anwendung und zukünftigen Plänen mit der 
 Daher haben wir uns entschieden eine eigene "Harvester"-Funktion zu schreiben. Zum einen benötigten wir aus dem PostgreSQL-Dump nur wenige Inhalte, und zum anderen hätten wir eine Art die Verlustdaten "einzusammeln" immer noch benötigt.
 Diese Verlustdaten und statischen Daten stehen gemeinsam in einer Datenbank, welche relationell miteinander verknüpft ist.
 
+![erm](erm.png)
+
 ## NodeJS
 
 NodeJS ist immernoch relativ experimentell, vor allem verglichen mit den großen, wie Python und PHP. Jedoch vom reinen Umfang her bietet sich NodeJS durchaus an. Es ist derzeit die größte Webumgebung, von der reinen Paketanzahl und -angebot.
